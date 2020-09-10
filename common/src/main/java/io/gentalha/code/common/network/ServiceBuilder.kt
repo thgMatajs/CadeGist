@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class ServiceBuilder {
-    inline operator fun <reified S> invoke(baseUrl: String, isDebugging: Boolean): S {
+    inline operator fun <reified S> invoke(baseUrl: String, isDebugging: Boolean = true): S {
         val httpClient = buildInterceptors(isDebugging)
         return Retrofit.Builder()
             .baseUrl(baseUrl)
