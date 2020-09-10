@@ -1,3 +1,4 @@
+include ':data'
 include ':remote'
 include ':model'
 include ':domain'
