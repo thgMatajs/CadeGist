@@ -1,6 +1,6 @@
 package io.gentalha.code.common.status
 
-enum class Status {
+enum class State {
     LOADING,
     SUCCESS,
     ERROR

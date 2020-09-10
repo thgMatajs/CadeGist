@@ -6,6 +6,7 @@ import io.gentalha.code.cadegist.domain.repository.GistRepository
 import io.gentalha.code.cadegist.model.Gist
 import io.reactivex.Completable
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 
 class GistRepositoryImplementation(
     private val gistCache: GistCacheRepository,
@@ -13,7 +14,19 @@ class GistRepositoryImplementation(
 ) : GistRepository {
 
     override fun getGists(page: Int): Single<List<Gist>> {
-        return gistRemote.getGists(page)
+        return Single.zip(
+            gistRemote.getGists(page).subscribeOn(Schedulers.io()),
+            gistCache.getFavoriteGists().subscribeOn(Schedulers.io()),
+            { remoteGists, favoriteGists ->
+                remoteGists.map { remoteGist ->
+//                    favoriteGists.map { cacheGist ->
+//                        remoteGist.isFavorite = remoteGist.id == cacheGist.id
+//                    }
+                    remoteGist.isFavorite = favoriteGists.contains(remoteGist)
+                }
+                remoteGists
+            }
+        )
     }
 
     override fun getFavoriteGists(): Single<List<Gist>> {
