@@ -12,7 +12,7 @@ data class CacheGist(
     override val id: String,
     @Embedded(prefix = "owner_")
     override val owner: CacheOwner,
-    override val isFavorite: Boolean
+    override var isFavorite: Boolean
 ) : Gist
 
 fun Gist.toCache() = CacheGist(

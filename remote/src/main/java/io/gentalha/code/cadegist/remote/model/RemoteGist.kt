@@ -10,5 +10,5 @@ class RemoteGist(
     @SerializedName("owner")
     override val owner: RemoteOwner,
     @Expose
-    override val isFavorite: Boolean
+    override var isFavorite: Boolean
 ) : Gist

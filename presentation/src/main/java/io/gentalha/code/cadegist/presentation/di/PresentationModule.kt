@@ -1,9 +1,7 @@
 package io.gentalha.code.cadegist.presentation.di
 
 import io.gentalha.code.cadegist.presentation.pagination.GistDataSource
-import io.gentalha.code.cadegist.presentation.viewmodel.GetFavoriteGistsViewModel
-import io.gentalha.code.cadegist.presentation.viewmodel.GetGistDetailViewModel
-import io.gentalha.code.cadegist.presentation.viewmodel.GetGistsViewModel
+import io.gentalha.code.cadegist.presentation.viewmodel.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,4 +10,6 @@ val presentationModule = module {
     viewModel { GetGistsViewModel(get()) }
     viewModel { GetFavoriteGistsViewModel(get()) }
     viewModel { GetGistDetailViewModel(get()) }
+    viewModel { AddGistInFavoriteViewModel(get()) }
+    viewModel { RemoveGistInFavoriteViewModel(get()) }
 }
