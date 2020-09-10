@@ -5,7 +5,7 @@ import java.lang.Exception
 class HandleState<out T>(
     val state: State,
     val data: T? = null,
-    val exception: Exception? = null
+    val exception: Throwable? = null
 ) {
 
     companion object {

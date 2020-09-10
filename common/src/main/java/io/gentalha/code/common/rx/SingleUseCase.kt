@@ -16,7 +16,7 @@ abstract class SingleUseCase<in Params, T> constructor(
     abstract fun buildUseCaseSingle(params: Params? = null): Single<T>
 
     open fun execute(
-        params: Params?,
+        params: Params? = null,
         onSuccess: (T) -> Unit,
         onError: (e: Throwable) -> Unit,
         onCompletable: (() -> Unit)? = null

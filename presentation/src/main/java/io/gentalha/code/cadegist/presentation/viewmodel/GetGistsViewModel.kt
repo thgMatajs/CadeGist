@@ -12,7 +12,7 @@ class GetGistsViewModel(
     private val dataSource: GistDataSource
 ) : ViewModel() {
 
-    val listData = Pager(PagingConfig(pageSize = 6)) {
+    val gistsFlowable = Pager(PagingConfig(pageSize = 20)) {
         dataSource
     }.flowable.cachedIn(viewModelScope)
 }
