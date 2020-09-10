@@ -7,6 +7,6 @@ interface GistRemoteRepository {
 
     fun getGists(page: Int): Single<List<Gist>>
 
-    fun getGistDetail(gistId: Int): Single<Gist>
+    fun getGistDetail(gistId: String): Single<Gist>
 
 }

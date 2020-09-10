@@ -6,7 +6,7 @@ import io.gentalha.code.cadegist.remote.service.GistService
 import io.gentalha.code.common.network.ServiceBuilder
 import org.koin.dsl.module
 
-val remoteModule = module {
+val remoteModule = module(override = true) {
     factory { ServiceBuilder().invoke<GistService>("https://api.github.com/") }
     factory<GistRemoteRepository> { GistRemoteRepositoryImplementation(get()) }
 }

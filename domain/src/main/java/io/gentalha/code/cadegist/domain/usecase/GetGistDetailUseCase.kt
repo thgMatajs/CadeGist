@@ -10,9 +10,9 @@ import io.reactivex.Single
 class GetGistDetailUseCase(
     private val repository: GistRepository,
     postExecutionThread: PostExecutionThread
-) : SingleUseCase<Int, Gist>(postExecutionThread) {
+) : SingleUseCase<String, Gist>(postExecutionThread) {
 
-    override fun buildUseCaseSingle(params: Int?): Single<Gist> {
+    override fun buildUseCaseSingle(params: String?): Single<Gist> {
         return params?.let {
             repository.getGistDetail(params)
         } ?: Single.error(ParamsCannotBeNullException())

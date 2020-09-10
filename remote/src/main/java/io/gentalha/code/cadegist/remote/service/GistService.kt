@@ -16,6 +16,6 @@ interface GistService {
 
     @GET("/gists/{gist_id}")
     fun getGistDetail(
-        @Path("gist_id") gistId: Int
+        @Path("gist_id") gistId: String
     ): Single<RemoteGist>
 }

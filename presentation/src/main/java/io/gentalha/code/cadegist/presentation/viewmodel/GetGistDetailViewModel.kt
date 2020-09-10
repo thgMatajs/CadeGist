@@ -17,7 +17,7 @@ class GetGistDetailViewModel(
         MutableLiveData<HandleState<Gist>>()
     }
 
-    fun loadGistDetail(gistId: Int) {
+    fun loadGistDetail(gistId: String) {
         gistDetailLiveData.setLoading()
         useCase.execute(
             params = gistId,

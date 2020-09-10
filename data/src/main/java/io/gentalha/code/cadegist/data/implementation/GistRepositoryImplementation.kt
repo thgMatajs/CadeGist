@@ -33,7 +33,7 @@ class GistRepositoryImplementation(
         return gistCache.getFavoriteGists()
     }
 
-    override fun getGistDetail(gistId: Int): Single<Gist> {
+    override fun getGistDetail(gistId: String): Single<Gist> {
         return gistRemote.getGistDetail(gistId)
     }
 

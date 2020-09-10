@@ -10,7 +10,7 @@ interface GistRepository {
 
     fun getFavoriteGists(): Single<List<Gist>>
 
-    fun getGistDetail(gistId: Int): Single<Gist>
+    fun getGistDetail(gistId: String): Single<Gist>
 
     fun addGistInFavorite(gist: Gist): Completable
 

@@ -15,7 +15,7 @@ class GistRemoteRepositoryImplementation(
         }
     }
 
-    override fun getGistDetail(gistId: Int): Single<Gist> {
+    override fun getGistDetail(gistId: String): Single<Gist> {
         return service.getGistDetail(gistId).map { it }
     }
 }
