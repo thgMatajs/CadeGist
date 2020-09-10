@@ -1,3 +1,4 @@
+include ':remote'
 include ':model'
 include ':domain'
 include ':common'

@@ -5,6 +5,7 @@
       <module name="common" target="1.7" />
       <module name="domain" target="1.7" />
       <module name="model" target="1.7" />
+      <module name="remote" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
