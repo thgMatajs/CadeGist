@@ -8,4 +8,7 @@
     <string name="no_connection_error_title">Sem conexão com a internet!</string>
     <string name="no_connection_error_description">Por favor verifique sua internet e tente novamente.</string>
     <string name="retry_label">Tentar novamente</string>
+    <string name="generic_error_title">Desculpe, algum erro ocorreu :,(</string>
+    <string name="generic_error_description">Algo não está legal, tente novamente.</string>
+    <string name="http_error_description">Algo não está legal, na comunicação com o servidor, tente novamente.</string>
 </resources>

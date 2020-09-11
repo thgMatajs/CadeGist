@@ -61,4 +61,27 @@ class ViewStateNotifier @JvmOverloads constructor(
         this.show()
     }
 
+    fun showGenericError() {
+        animation.apply {
+            setAnimation(R.raw.error)
+            repeatCount = 0
+        }
+        title.text = context.getString(R.string.generic_error_title)
+        description.text = context.getString(R.string.generic_error_description)
+        this.show()
+    }
+
+    fun showHttpError(
+        retryClick: () -> Unit
+    ) {
+        animation.apply {
+            setAnimation(R.raw.error)
+            repeatCount = 0
+        }
+        title.text = context.getString(R.string.generic_error_title)
+        description.text = context.getString(R.string.http_error_description)
+        btn.setOnClickListener { retryClick.invoke() }
+        this.show()
+    }
+
 }

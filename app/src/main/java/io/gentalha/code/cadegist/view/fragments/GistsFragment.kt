@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.gentalha.code.cadegist.R
 import io.gentalha.code.cadegist.adapter.GistsAdapter
+import io.gentalha.code.cadegist.custom_views.ViewStateNotifier
 import io.gentalha.code.cadegist.presentation.extensions.hide
 import io.gentalha.code.cadegist.presentation.extensions.show
 import io.gentalha.code.cadegist.presentation.viewmodel.AddGistInFavoriteViewModel
@@ -29,6 +30,7 @@ class GistsFragment : Fragment() {
     private val removeGistOfFavoriteViewModel: RemoveGistInFavoriteViewModel by viewModel()
     private lateinit var gistsRv: RecyclerView
     private lateinit var progressBar: ProgressBar
+    private lateinit var viewStateNotifier: ViewStateNotifier
 
     private val gistAdapter: GistsAdapter by lazy {
         GistsAdapter(
@@ -64,6 +66,7 @@ class GistsFragment : Fragment() {
         view.apply {
             gistsRv = findViewById(R.id.gistsRv)
             progressBar = findViewById(R.id.gistsProgressBar)
+            viewStateNotifier = findViewById(R.id.gistsStateNotifier)
         }
     }
 
@@ -72,17 +75,7 @@ class GistsFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = gistAdapter
         }
-
-        val subscribe = viewModel.gistsFlowable
-            .subscribe(
-                {
-                    gistAdapter.submitData(lifecycle, it)
-                },
-                {
-                    handleError(it)
-                }
-            )
-
+        loadGists()
         gistAdapter.addLoadStateListener {
             when (it.refresh) {
                 is LoadState.Loading -> {
@@ -90,6 +83,7 @@ class GistsFragment : Fragment() {
                 }
                 is LoadState.Error -> {
                     hideLoading()
+                    viewStateNotifier.showGenericError()
                 }
                 is LoadState.NotLoading -> {
                     hideLoading()
@@ -98,6 +92,12 @@ class GistsFragment : Fragment() {
         }
     }
 
+    private fun loadGists() {
+        val subscribe = viewModel.gistsFlowable
+            .subscribe {
+                gistAdapter.submitData(lifecycle, it)
+            }
+    }
 
     private fun showLoading() {
         progressBar.show()
@@ -107,14 +107,6 @@ class GistsFragment : Fragment() {
     private fun hideLoading() {
         progressBar.hide()
         gistsRv.show()
-    }
-
-    private fun handleError(error: Throwable?) {
-        error?.handleExceptions(
-            httpException = {},
-            whitOutNetWorkException = {},
-            otherExceptions = {}
-        )
     }
 
 }

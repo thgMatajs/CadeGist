@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import coil.api.load
 import io.gentalha.code.cadegist.R
+import io.gentalha.code.cadegist.custom_views.ViewStateNotifier
 import io.gentalha.code.cadegist.model.Gist
 import io.gentalha.code.cadegist.presentation.extensions.hide
 import io.gentalha.code.cadegist.presentation.extensions.show
@@ -24,6 +25,7 @@ class GistDetailActivity : AppCompatActivity() {
     private val progressBar: ProgressBar by lazy { findViewById(R.id.gistDetailProgressBar) }
     private val ownerName: TextView by lazy { findViewById(R.id.gistDetailTvOwnerName) }
     private val ownerIv: ImageView by lazy { findViewById(R.id.gistDetailIv) }
+    private val stateNotifier: ViewStateNotifier by lazy { findViewById(R.id.gistDetailStateNotifier) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +48,7 @@ class GistDetailActivity : AppCompatActivity() {
         progressBar.show()
         ownerIv.hide()
         ownerName.hide()
+        stateNotifier.hide()
     }
 
     private fun hideLoading() {
@@ -65,9 +68,15 @@ class GistDetailActivity : AppCompatActivity() {
     private fun handleError(error: Throwable?) {
         hideLoading()
         error?.handleExceptions(
-            httpException = {},
-            whitOutNetWorkException = {},
-            otherExceptions = {}
+            httpException = {
+                stateNotifier.showHttpError { getGistViewModel.loadGistDetail(gistId) }
+            },
+            whitOutNetWorkException = {
+                stateNotifier.showNoConnectionError { getGistViewModel.loadGistDetail(gistId) }
+            },
+            otherExceptions = {
+                stateNotifier.showGenericError()
+            }
         )
     }
 }

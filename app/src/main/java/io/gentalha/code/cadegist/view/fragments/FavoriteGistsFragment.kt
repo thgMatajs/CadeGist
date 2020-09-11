@@ -100,6 +100,7 @@ class FavoriteGistsFragment : Fragment() {
     private fun showLoading() {
         progressBar.show()
         favoriteGistsRv.hide()
+        viewStateNotifier.hide()
     }
 
     private fun hideLoading() {
