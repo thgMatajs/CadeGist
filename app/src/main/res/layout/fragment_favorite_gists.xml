@@ -19,6 +19,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favoriteGistsRv"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <io.gentalha.code.cadegist.custom_views.ViewStateNotifier
+        android:id="@+id/favoriteGistsStateNotifier"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

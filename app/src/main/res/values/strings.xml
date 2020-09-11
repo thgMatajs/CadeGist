@@ -3,4 +3,9 @@
     <string name="bottom_nav_label_gists">Gists</string>
     <string name="bottom_nav_label_favorite">Favoritos</string>
     <string name="bottom_nav_label_more">Sobre</string>
+    <string name="favorite_empty_title">Nenhum favorito :(</string>
+    <string name="favorite_empty_description">Você ainda não adicionou ninguem aos seus favoritos.</string>
+    <string name="no_connection_error_title">Sem conexão com a internet!</string>
+    <string name="no_connection_error_description">Por favor verifique sua internet e tente novamente.</string>
+    <string name="retry_label">Tentar novamente</string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.gentalha.code.cadegist.R
 import io.gentalha.code.cadegist.adapter.FavoriteGistsAdapter
+import io.gentalha.code.cadegist.custom_views.ViewStateNotifier
 import io.gentalha.code.cadegist.model.Gist
 import io.gentalha.code.cadegist.presentation.extensions.hide
 import io.gentalha.code.cadegist.presentation.extensions.show
@@ -25,6 +26,7 @@ class FavoriteGistsFragment : Fragment() {
 
     private lateinit var favoriteGistsRv: RecyclerView
     private lateinit var progressBar: ProgressBar
+    private lateinit var viewStateNotifier: ViewStateNotifier
     private val getFavoritesViewModel: GetFavoriteGistsViewModel by viewModel()
     private val addGistInFavoriteViewModel: AddGistInFavoriteViewModel by viewModel()
     private val removeGistOfFavoriteViewModel: RemoveGistInFavoriteViewModel by viewModel()
@@ -65,6 +67,7 @@ class FavoriteGistsFragment : Fragment() {
         view.apply {
             favoriteGistsRv = findViewById(R.id.favoriteGistsRv)
             progressBar = findViewById(R.id.favoriteGistsProgressBar)
+            viewStateNotifier = findViewById(R.id.favoriteGistsStateNotifier)
         }
     }
 
@@ -102,11 +105,17 @@ class FavoriteGistsFragment : Fragment() {
     private fun hideLoading() {
         progressBar.hide()
         favoriteGistsRv.show()
+        viewStateNotifier.hide()
     }
 
     private fun handleSuccessResult(gists: List<Gist>?) {
         hideLoading()
         favoriteAdapter.submitList(gists)
+        if (gists.isNullOrEmpty())
+            viewStateNotifier.showEmptyState(
+                titleResId = R.string.favorite_empty_title,
+                descriptionResId = R.string.favorite_empty_description
+            )
     }
 
     private fun handleError(error: Throwable?) {
