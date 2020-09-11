@@ -79,7 +79,7 @@ class GistsFragment : Fragment() {
                     gistAdapter.submitData(lifecycle, it)
                 },
                 {
-                    println("THG_LOG -> ERROR ${it.message}")
+                    handleError(it)
                 }
             )
 
@@ -116,4 +116,5 @@ class GistsFragment : Fragment() {
             otherExceptions = {}
         )
     }
+
 }

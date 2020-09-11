@@ -1,5 +1,6 @@
 package io.gentalha.code.cadegist.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import io.gentalha.code.cadegist.presentation.extensions.show
 import io.gentalha.code.cadegist.presentation.viewmodel.AddGistInFavoriteViewModel
 import io.gentalha.code.cadegist.presentation.viewmodel.GetFavoriteGistsViewModel
 import io.gentalha.code.cadegist.presentation.viewmodel.RemoveGistInFavoriteViewModel
+import io.gentalha.code.cadegist.view.activities.GistDetailActivity
 import io.gentalha.code.common.extensions.handleExceptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,7 +31,9 @@ class FavoriteGistsFragment : Fragment() {
     private val favoriteAdapter: FavoriteGistsAdapter by lazy {
         FavoriteGistsAdapter(
             itemClick = {
-
+                val intent = Intent(requireContext(), GistDetailActivity::class.java)
+                intent.putExtra("GIST_ID", it.id)
+                startActivity(intent)
             },
             favoriteClick = {
                 if (it.isFavorite) {

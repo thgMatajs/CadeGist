@@ -1,13 +1,17 @@
 package io.gentalha.code.cadegist.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import coil.api.load
 import io.gentalha.code.cadegist.R
 import io.gentalha.code.cadegist.model.Gist
+import io.gentalha.code.cadegist.presentation.extensions.hide
+import io.gentalha.code.cadegist.presentation.extensions.show
 import io.gentalha.code.cadegist.presentation.viewmodel.GetGistDetailViewModel
 import io.gentalha.code.common.extensions.handleExceptions
-import io.gentalha.code.common.status.State
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GistDetailActivity : AppCompatActivity() {
@@ -16,6 +20,10 @@ class GistDetailActivity : AppCompatActivity() {
     private val gistId: String by lazy {
         intent.getStringExtra("GIST_ID") ?: ""
     }
+
+    private val progressBar: ProgressBar by lazy { findViewById(R.id.gistDetailProgressBar) }
+    private val ownerName: TextView by lazy { findViewById(R.id.gistDetailTvOwnerName) }
+    private val ownerIv: ImageView by lazy { findViewById(R.id.gistDetailIv) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,18 +43,27 @@ class GistDetailActivity : AppCompatActivity() {
     }
 
     private fun showLoading() {
-        println("THG_LOG --> Loading")
+        progressBar.show()
+        ownerIv.hide()
+        ownerName.hide()
     }
 
     private fun hideLoading() {
-
+        progressBar.hide()
+        ownerName.show()
+        ownerIv.show()
     }
 
     private fun handleSuccessResult(gist: Gist?) {
-
+        hideLoading()
+        gist?.owner?.apply {
+            ownerIv.load(avatarUrl)
+            ownerName.text = name
+        }
     }
 
     private fun handleError(error: Throwable?) {
+        hideLoading()
         error?.handleExceptions(
             httpException = {},
             whitOutNetWorkException = {},
