@@ -19,10 +19,10 @@ class GistRepositoryImplementation(
             gistCache.getFavoriteGists().subscribeOn(Schedulers.io()),
             { remoteGists, favoriteGists ->
                 remoteGists.map { remoteGist ->
-//                    favoriteGists.map { cacheGist ->
-//                        remoteGist.isFavorite = remoteGist.id == cacheGist.id
-//                    }
-                    remoteGist.isFavorite = favoriteGists.contains(remoteGist)
+                    favoriteGists.map { cacheGist ->
+                        remoteGist.isFavorite = remoteGist.id == cacheGist.id
+                        println("THG_LOG GIST --> ${remoteGist.owner.name} - ${remoteGist.isFavorite}")
+                    }
                 }
                 remoteGists
             }

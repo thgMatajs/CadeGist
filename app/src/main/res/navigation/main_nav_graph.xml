@@ -8,4 +8,8 @@
         android:id="@+id/to_gists"
         android:name="io.gentalha.code.cadegist.view.fragments.GistsFragment" />
 
+    <fragment
+        android:id="@+id/to_favorites"
+        android:name="io.gentalha.code.cadegist.view.fragments.FavoriteGistsFragment" />
+
 </navigation>

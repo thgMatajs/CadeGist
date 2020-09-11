@@ -10,7 +10,9 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import io.gentalha.code.cadegist.R
 import io.gentalha.code.cadegist.adapter.GistsAdapter
+import io.gentalha.code.cadegist.presentation.viewmodel.AddGistInFavoriteViewModel
 import io.gentalha.code.cadegist.presentation.viewmodel.GetGistsViewModel
+import io.gentalha.code.cadegist.presentation.viewmodel.RemoveGistInFavoriteViewModel
 import io.gentalha.code.cadegist.view.activities.GistDetailActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,6 +20,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class GistsFragment : Fragment() {
 
     private val viewModel: GetGistsViewModel by viewModel()
+    private val addGistInFavoriteViewModel: AddGistInFavoriteViewModel by viewModel()
+    private val removeGistOfFavoriteViewModel: RemoveGistInFavoriteViewModel by viewModel()
     private lateinit var gistsRv: RecyclerView
     private val adapter: GistsAdapter by lazy {
         GistsAdapter(
@@ -26,7 +30,13 @@ class GistsFragment : Fragment() {
                 intent.putExtra("GIST_ID", it.id)
                 startActivity(intent)
             },
-            favoriteClick = {}
+            favoriteClick = {
+                if (it.isFavorite) {
+                    removeGistOfFavoriteViewModel.removeOfFavorite(it)
+                } else {
+                    addGistInFavoriteViewModel.addInFavorite(it)
+                }
+            }
         )
     }
 
