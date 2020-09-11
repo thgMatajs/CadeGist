@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/host_nav_graph"
+    app:startDestination="@+id/to_gists">
+
+    <fragment
+        android:id="@+id/to_gists"
+        android:name="io.gentalha.code.cadegist.view.fragments.GistsFragment" />
+
+</navigation>

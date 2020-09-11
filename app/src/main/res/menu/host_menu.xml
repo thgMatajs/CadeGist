@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/to_gists"
+        android:icon="@drawable/ic_code"
+        android:title="Gists"
+        />
+
+    <item
+        android:id="@+id/to_favorites"
+        android:icon="@drawable/ic_favorite_full"
+        android:title="Favoritos"/>
+
+    <item
+        android:id="@+id/to_more"
+        android:icon="@drawable/ic_more"
+        android:title="Sobre"/>
+</menu>

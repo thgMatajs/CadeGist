@@ -4,10 +4,10 @@ import retrofit2.HttpException
 import java.net.UnknownHostException
 import kotlin.Exception
 
-fun Exception.handleExceptions(
+fun Throwable.handleExceptions(
     httpException: () -> Unit = {},
     whitOutNetWorkException: () -> Unit = {},
-    otherExceptions: (error: Exception) -> Unit = {}
+    otherExceptions: (error: Throwable) -> Unit = {}
 ) {
 
     when (this) {

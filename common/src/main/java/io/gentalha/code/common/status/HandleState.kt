@@ -8,17 +8,15 @@ class HandleState<out T>(
     val exception: Throwable? = null
 ) {
 
-    companion object {
-        fun <T> loading(): HandleState<T> {
-            return HandleState(State.LOADING)
-        }
-
-        fun <T> success(data: T?): HandleState<T> {
-            return HandleState(State.SUCCESS, data)
-        }
-
-        fun <T> error(msg: String, ex: Exception): HandleState<T> {
-            return HandleState(state = State.ERROR, exception =  ex)
+    fun handle(
+        onLoading: () -> Unit,
+        onSuccess: (T?) -> Unit,
+        onError: (Throwable?) -> Unit
+    ) {
+        when (state) {
+            State.LOADING -> onLoading()
+            State.SUCCESS -> onSuccess(data)
+            State.ERROR -> onError(exception)
         }
     }
 }
