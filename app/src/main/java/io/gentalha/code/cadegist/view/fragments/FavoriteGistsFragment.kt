@@ -53,6 +53,7 @@ class FavoriteGistsFragment : Fragment() {
         initViews(view)
         setupRv()
         observeGetFavoriteGistsLiveData()
+        observeRemoveGistOfFavorite()
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -75,6 +76,15 @@ class FavoriteGistsFragment : Fragment() {
             it.handle(
                 onLoading = ::showLoading,
                 onSuccess = ::handleSuccessResult,
+                onError = ::handleError
+            )
+        })
+    }
+
+    private fun observeRemoveGistOfFavorite() {
+        removeGistOfFavoriteViewModel.removeFavoriteGistLiveData.observe(viewLifecycleOwner, {
+            it.handle(
+                onSuccess = { getFavoritesViewModel.loadFavoriteGists() },
                 onError = ::handleError
             )
         })

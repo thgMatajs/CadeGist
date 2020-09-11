@@ -9,9 +9,9 @@ class HandleState<out T>(
 ) {
 
     fun handle(
-        onLoading: () -> Unit,
-        onSuccess: (T?) -> Unit,
-        onError: (Throwable?) -> Unit
+        onLoading: () -> Unit = {},
+        onSuccess: (T?) -> Unit = {},
+        onError: (Throwable?) -> Unit = {}
     ) {
         when (state) {
             State.LOADING -> onLoading()

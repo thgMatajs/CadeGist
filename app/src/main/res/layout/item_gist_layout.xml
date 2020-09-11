@@ -38,14 +38,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Android" />
 
-        <ToggleButton
+        <CheckBox
             android:id="@+id/gistItemBtnFavorite"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_margin="4dp"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:button="@drawable/favorite_btn"
             app:layout_constraintEnd_toEndOf="@id/gistItemIv"
-            app:layout_constraintTop_toTopOf="@id/gistItemIv"/>
+            app:layout_constraintTop_toTopOf="@id/gistItemIv"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
