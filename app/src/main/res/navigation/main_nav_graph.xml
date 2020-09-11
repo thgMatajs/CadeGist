@@ -5,10 +5,12 @@
     app:startDestination="@+id/to_gists">
 
     <fragment
+        android:label="@string/bottom_nav_label_gists"
         android:id="@+id/to_gists"
         android:name="io.gentalha.code.cadegist.view.fragments.GistsFragment" />
 
     <fragment
+        android:label="@string/bottom_nav_label_favorite"
         android:id="@+id/to_favorites"
         android:name="io.gentalha.code.cadegist.view.fragments.FavoriteGistsFragment" />
 

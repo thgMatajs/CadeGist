@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CadeGist</string>
+    <string name="bottom_nav_label_gists">Gists</string>
+    <string name="bottom_nav_label_favorite">Favoritos</string>
+    <string name="bottom_nav_label_more">Sobre</string>
 </resources>

@@ -21,7 +21,6 @@ class GistRepositoryImplementation(
                 remoteGists.map { remoteGist ->
                     favoriteGists.map { cacheGist ->
                         remoteGist.isFavorite = remoteGist.id == cacheGist.id
-                        println("THG_LOG GIST --> ${remoteGist.owner.name} - ${remoteGist.isFavorite}")
                     }
                 }
                 remoteGists
@@ -38,10 +37,12 @@ class GistRepositoryImplementation(
     }
 
     override fun addGistInFavorite(gist: Gist): Completable {
+        gist.isFavorite = true
         return gistCache.addGistInFavorite(gist)
     }
 
     override fun removeGistInFavorite(gist: Gist): Completable {
+        gist.isFavorite = false
         return gistCache.removeGistInFavorite(gist)
     }
 }
