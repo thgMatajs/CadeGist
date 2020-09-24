@@ -2,9 +2,7 @@ package io.gentalha.code.cadegist.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,7 +20,7 @@ import io.gentalha.code.cadegist.view.activities.GistDetailActivity
 import io.gentalha.code.common.extensions.handleExceptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoriteGistsFragment : Fragment() {
+class FavoriteGistsFragment : Fragment(R.layout.fragment_favorite_gists) {
 
     private lateinit var favoriteGistsRv: RecyclerView
     private lateinit var progressBar: ProgressBar
@@ -47,15 +45,8 @@ class FavoriteGistsFragment : Fragment() {
         )
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        getFavoritesViewModel.loadFavoriteGists()
-        return inflater.inflate(R.layout.fragment_favorite_gists, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        getFavoritesViewModel.loadFavoriteGists()
         initViews(view)
         setupRv()
         observeGetFavoriteGistsLiveData()

@@ -2,9 +2,7 @@ package io.gentalha.code.cadegist.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.paging.LoadState
@@ -19,11 +17,10 @@ import io.gentalha.code.cadegist.presentation.viewmodel.AddGistInFavoriteViewMod
 import io.gentalha.code.cadegist.presentation.viewmodel.GetGistsViewModel
 import io.gentalha.code.cadegist.presentation.viewmodel.RemoveGistInFavoriteViewModel
 import io.gentalha.code.cadegist.view.activities.GistDetailActivity
-import io.gentalha.code.common.extensions.handleExceptions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class GistsFragment : Fragment() {
+class GistsFragment : Fragment(R.layout.fragment_gists) {
 
     private val viewModel: GetGistsViewModel by viewModel()
     private val addGistInFavoriteViewModel: AddGistInFavoriteViewModel by viewModel()
@@ -47,13 +44,6 @@ class GistsFragment : Fragment() {
                 }
             }
         )
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_gists, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
