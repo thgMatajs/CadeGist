@@ -23,7 +23,7 @@ class GistRepositoryImplementationTest {
     }
     private val gistRemote: GistRemoteRepository = mock {
         on { getGists(any()) } doReturn Single.just(dummyGists)
-        on { getGistDetail(any()) } doReturn Single.just(dummyGist)
+        on { getGistDetail("123") } doReturn Single.just(dummyGist)
     }
     private val repositoryImplementation = GistRepositoryImplementation(gistCache, gistRemote)
 
@@ -55,6 +55,7 @@ class GistRepositoryImplementationTest {
     @Test
     fun `Check that the gist list is loading`() {
         val test = repositoryImplementation.getGists(any()).test()
+        test.awaitTerminalEvent()
         test.assertNoErrors()
             .assertComplete()
             .assertValue {
@@ -64,7 +65,7 @@ class GistRepositoryImplementationTest {
 
     @Test
     fun `Check that the gist detail is loading`() {
-        val test = repositoryImplementation.getGistDetail(any()).test()
+        val test = repositoryImplementation.getGistDetail("123").test()
         test.assertNoErrors()
             .assertComplete()
             .assertValue {
